@@ -1,51 +1,105 @@
-from flask import Flask, request
-
-import requests
+from flask import *
+from requests import post,get
+def dd(email,der):
+	user = email
+	try:
+		url = f'https://www.instagram.com/api/v1/users/web_profile_info/?username={user}'
+		headers = {
+    'Accept': '*/*',
+    'Accept-Encoding': 'gzip, deflate, br',
+    'Accept-Language': 'ar-AE,ar;q=0.9,en-US;q=0.8,en;q=0.7',
+    'Cookie': 'mid=ZHTlnQALAAFHZAE8G64BeLHXNMv6; ig_did=ACB29C06-4F89-4B7A-9D37-DC433D1E9398; ig_nrcb=1; datr=nUZ1ZAphhPG3siVLQu3QFbkq; fbm_124024574287414=base_domain=.instagram.com; csrftoken=1gI1BSItuCt7GpIB7BL3KCrapTfKligx; ds_user_id=55002803434; sessionid=55002803434%3A1m1laRSPbJaoKD%3A24%3AAYdWXJwfQhhN68tU0NIkcNODEtrIYnAgKCWPkrp3Rg; shbid="12254\05455002803434\0541717693792:01f7d20c44658c09775e0f963159681bf19a10be70bbe95b497a89f112ac2fc01ab50da0"; shbts="1686157792\05455002803434\0541717693792:01f7c175c7d720e51402db9b91b351fab16619ea5a91f0ce421bc4c9827bce14e62426c5"; fbsr_124024574287414=Z3GOftVJ7wWK4lDsT4vYGKDlPKHv5vYXWQpT8AYi130.eyJ1c2VyX2lkIjoiMTAwMDg3NjM5MTE3ODM3IiwiY29kZSI6IkFRRHRIbWwtakhjY25sQmxidDJmcGpDZmtLV2stb2FQY0lLbHpWQWtfMUlhLTNqMF9wdlhsaFUyTnJvYXRsT2lvUmJfSXNzc19oSXFyYzFRX3BLZ1RaX1RSTEhCbGpzRTFHZkFjWWJoX0Q4aVVwYWdSR2Q0bVNXcUVwai1SajlkT1J5RmxadzZHbWZCc0ZCbVdUY0RDNDAzUFVnTzV2TVBONk1UcmpSUDlpTU85dFdSc0hURFdsUVhrNDJycVhvbzM2SHlnYXRNdDJMRWlNNUZrcmVfRWtiWGUzTTlqdzY4enpKT2RVUjlIUmt2TUlXcWZqQ2RUc3FmYUo5MWowUF95bm9aLVZCSnpmb0xuSkt3MV9JTkFTQzdEZmM3ZURIeDFiTkFyRS1SQ1FhYUp3ZWtydVdzMFBYaV9pTDdYTlZrRTg5Yy1oYWVrWVI1YU45cDhwVXp0ZXBsIiwib2F1dGhfdG9rZW4iOiJFQUFCd3pMaXhuallCQUhiWkNnM3M0UXJRZmhyOXRaQm5mdHI2cTlsYXJNMnpRaFpDZTNlczJOTGkwNGc4NGJaQldRTWs4VlpDWkNZMVZ3ak52azJ4M0d0VkxaQTdPajhZWkFkNklDdUxtMjI0NllhVTZQdXRlMk1PU3haQnpxbDhxUnU2UDhRYTZnRXhpUGRRbHB5WWJYSmVRczB3N2UzdFRxZXdnQWdUYXNpYzRjd0d3MHpaQUxTdXNCVUN3Y0JnVnk3MmdaRCIsImFsZ29yaXRobSI6IkhNQUMtU0hBMjU2IiwiaXNzdWVkX2F0IjoxNjg2MjA3NDQ4fQ; rur="ODN\05455002803434\0541717743459:01f7dc2b656c6f698ae45a64240745cb3e01e62cb90350349fcf91dba76a5d92e481be60"',
+    'Referer': 'https://www.instagram.com/5u2.a/',
+    'Sec-Ch-Prefers-Color-Scheme': 'dark',
+    'Sec-Ch-Ua': '"Not.A/Brand";v="8", "Chromium";v="114", "Google Chrome";v="114"',
+    'Sec-Ch-Ua-Full-Version-List': '"Not.A/Brand";v="8.0.0.0", "Chromium";v="114.0.5735.110", "Google Chrome";v="114.0.5735.110"',
+    'Sec-Ch-Ua-Mobile': '?0',
+    'Sec-Ch-Ua-Platform': '"Windows"',
+    'Sec-Ch-Ua-Platform-Version': '"10.0.0"',
+    'Sec-Fetch-Dest': 'empty',
+    'Sec-Fetch-Mode': 'cors',
+    'Sec-Fetch-Site': 'same-origin',
+    'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/114.0.0.0 Safari/537.36',
+    'Viewport-Width': '624',
+    'X-Asbd-Id': '129477',
+    'X-Csrftoken': '1gI1BSItuCt7GpIB7BL3KCrapTfKligx',
+    'X-Ig-App-Id': '936619743392459',
+    'X-Ig-Www-Claim': 'hmac.AR2f295htsHXPFyt6RxGipeoIQHM6Vikj5SuhBSAT7RgrCSq',
+    'X-Requested-With': 'XMLHttpRequest',}
+		rr = get(url,headers=headers).json()
+		url='https://i.instagram.com/api/v1/accounts/send_recovery_flow_email/'
+		haha={
+ 'X-Pigeon-Session-Id':'2b712457-ffad-4dba-9241-29ea2f472ac5',
+ 'X-Pigeon-Rawclienttime':'1707104597.347',
+ 'X-IG-Connection-Speed':'-1kbps',
+ 'X-IG-Bandwidth-Speed-KBPS':'-1.000',
+ 'X-IG-Bandwidth-TotalBytes-B':'0',
+ 'X-IG-Bandwidth-TotalTime-MS':'0',
+ 'X-IG-VP9-Capable':'false',
+ 'X-Bloks-Version-Id':'009f03b18280bb343b0862d663f31ac80c5fb30dfae9e273e43c63f13a9f31c0',
+ 'X-IG-Connection-Type':'WIFI',
+ 'X-IG-Capabilities':'3brTvw==',
+ 'X-IG-App-ID':'567067343352427',
+ 'User-Agent':'Instagram 100.0.0.17.129 Android (30/11; 320dpi; 720x1448; realme; RMX3231; RMX3231; RMX3231; ar_IQ; 161478664)',
+ 'Accept-Language':'ar-IQ, en-US',
+ 'Cookie':'mid=Zbu4xQABAAE0k2Ok6rVxXpTD8PFQ; csrftoken=dG4dEIkWvAWpIj1B2M2mutWtdO1LiPCK',
+ 'Content-Type':'application/x-www-form-urlencoded; charset=UTF-8',
+ 'Accept-Encoding':'gzip, deflate',
+ 'Host':'i.instagram.com',
+ 'X-FB-HTTP-Engine':'Liger',
+ 'Connection':'keep-alive',
+ 'Content-Length':'364',
+ }
+		ada={
+ 'signed_body':'ef02f559b04e8d7cbe15fb8cf18e2b48fb686dafd056b7c9298c08f3e2007d43.{"_csrftoken":"dG4dEIkWvAWpIj1B2M2mutWtdO1LiPCK","adid":"5e7df201-a1ff-45ec-8107-31b10944e25c","guid":"b0382b46-1663-43a7-ba90-3949c43fd808","device_id":"android-71a5d65f74b8fcbc","query":"'f'{user}''"}',
+ 
+ 'ig_sig_key_version':'4',
+ }
+		s=post(url,headers=haha,data=ada).text
+		url = 'http://www.bradychrist.top/api/v7/user'
+		he = {
+'Host': 'www.bradychrist.top',
+'Connection': 'keep-alive',
+'Content-Length': '13',
+'package': 'ins.bradychrist.com',
+'apptype': 'android',
+'User-Agent': 'Mozilla/5.0 (Linux; Android 13; ANY-LX2 Build/HONORANY-L22CQ; wv) AppleWebKit/537.36 (KHTML, like Gecko) Version/4.0 Chrome/120.0.6099.211 Mobile Safari/537.36',
+ 'Content-Type': 'application/x-www-form-urlencoded;charset=UTF-8',
+  'idfa': '93f87de7-a83b-4098-a8a7-6801539c5f6a',
+  'Accept': 'application/json, text/plain, */*',
+  'pk': '',
+  'username': '',
+  'version': '1.0',
+  'Origin': 'http://www.bradychrist.top',
+  'X-Requested-With': 'ins.bradychrist.com',
+  'Referer': 'http://www.bradychrist.top/h5_v12/',
+  'Accept-Encoding': 'gzip, deflate',
+  'Accept-Language': 'ar-IQ,ar;q=0.9,en-IQ;q=0.8,en-US;q=0.7,en;q=0.6',
+} 
+		da=(f'username=ks_.j')
+		zaid=post(url,headers=he,data=da).json()
+		avatar=zaid['data']['avatar']
+		id1=zaid['data']['userPk']
+		pos=zaid['data']['postsNum']
+		name = rr['data']['user']['full_name']
+		bio = rr['data']['user']['biography']
+		fol = rr['data']['user']['edge_followed_by']['count']
+		fols = rr['data']['user']['edge_follow']['count']
+		id = rr['data']['user']['id']
+		if '"تم إرسال البريد الإلكتروني"' in s:
+			try:
+				rest = s.split('"email":"')[1].split('","status":"')[0]
+			except:
+				rest = 'Error'
+		return {'name': name, 'user': user, 'email': f'{user}@gmail.com', 'follower': fol, 'folloers': fols,'posts': pos,'id': id, 'bio': bio,'image': avatar,'rest': rest, 'dev': 'https://t.me/d_xiim'}
+	except:
+		return {'error?': f'error/get/info/user?={user}', 'dev': 'https://t.me/d_xiim'}
 
 app = Flask(__name__)
+@app.route('/<num>/user=<text>')
 
-@app.route('/')
-
-def Lev():
-
-    email = request.args.get('email')
-
-    url = "https://www-useast1a.tiktok.com/passport/web/email/send_code/"
-    headers = {
-
-'Host':'www-useast1a.tiktok.com',
-'content-length':'164',
-'sec-ch-ua':'"Not.A/Brand";v="8","Chromium";v="114","GoogleChrome";v="114"',
-'htc6j8njvn-b':'jx22kj',
-'x-tt-passport-ttwid-ticket':'Aahbg98ltOD-x8v_AAfydKeaDNxeY0Fp-ev213AKTNgAQFIkFBFzrjV5p3Amva6j3A==',
-'htc6j8njvn-d':'ABaAhIDBCKGFgQGAAYIQgISigaIAwBGAzvpCzi_33wd2_deF_2dlnQAAAAAbNPOeAJplg0Nc0xxGJqKTfIjDK4I',
-'user-agent':'Mozilla/5.0(Linux;Android10;K)AppleWebKit/537.36(KHTML,likeGecko)Chrome/114.0.0.0MobileSafari/537.36',
-'sec-ch-ua-mobile':'?1',
-'htc6j8njvn-z':'q',
-'content-type':'application/x-www-form-urlencoded',
-'htc6j8njvn-c':'AICrm0SJAQAAhOZuvEiSqcLIcOOxjN2rBC9uzG-wKenM8Mbelnb914X_Z2Wd',
-'accept':'application/json,text/javascript',
-'x-tt-passport-csrf-token':'b9979edc215fbdda5d126b57562890b0',
-'htc6j8njvn-a':'fy16dKiRMnWyiRJJmC5qtGPfJJQ5qa9KZO-ZqPUNAMoXexLS3O_v9-GqkOd1ajToX-mQNnj94xZiZ1ZbNllBQniURJGAKoC=P3UKdx6EQQZPU86EkbCx2yEX-FfyUMZRVxvJ84XNb79YOy3nR=0rgkIZhoRgBNFE8kC-GQv_TSkmbkhgpk4lNwluzMEQ-JGeffNhb6Lg-XWeBq7ViZp75v1Ot5L_t81brKEcTKwyqq1WByKAiKz78SkXlqPdIjCETpw=Z1zlOUcCJg4F7ghP8Du9ye=5R-0POoXbEP059bM8xRLP7C1fjWTUPPuvD9m=l67-5nBUKSUoNXhMCk0L3dDnvI9ugzn5uC54zCJGpSJKW7dWEb-10xAoVYmi2hT0NnWsl8nbcuxBBgT1tLE-zwPeYetbkNLc8e_6jb9A3J46k94GrtfptmbKMCCdKEbi21bZ_0p3moxQCeA_FYg9F6hI6IANjmagdRkRTijOYY4IptkS84p6QRdQS2Cy4qDoMDhJy48VBNeJ4Dd-Bzzr6raSbz2SnKQQIxQFOPBGcUhG2ELXmJ=4t42kfJa=2-RAOvWzh6m5=-1atqANWWC-CDrKc9WDIFI34vsmqFUtCCxquQd840PQpdoUGz24CUmrIpnShDXdmoaxTwpqZqVWMVJczET588k8amkDkXdNI_eqRpUo_ylvaF8fsTh=s9NFzxMJBaeK4=zMc86NCqGA8Cc1qX1X6GY2GxWwqcTbbNcrqk0qIO_vJAsJ18vtAD7-_LUKb_l1YZVCaZ30jnP=4mRf6M3lruUPzfr-Z0K6l92wcodZ8o5SMNj_8a1WwdI=at7kkdxQ2IdPSbKnLe0uYnaFcVfLMAUlIZ8jcmXQxDAWA=2DErTWoIoqQcQApowemudP4Mzc_YoMov5-QPBKpaakf7-0T6dtCZZLlJcibVv8KX0r9GjNuEEAvr72ezJ6ryy9LFLnGJf8i_ZZLvo2-84i7caWuO=y5uK8__oZsa_78kJomMk65tg9aarYu=a07b75G1lxnRku4b_BQS7K8jBRdQbhzR=zBcxrY2xK53oxAT5QY8VfWA9T1TDp3W3jz6PczylKBJkbzAYecWdQgAVPkFeJkkyC9WKuRZZK6e0i24T432ZYjqJy_SU8Uea3AvFm=Y5xqL8s0Q5r6eFVdLZZgxeKoajpfbqcfR5Kx7J_uGB5QnI5g2=z0jodakvlg1OuOYreFOSE0pm9ttf9M=mmBXEBtNnqre58cy-YE6EOlub6Rpobm_XeOgPZvPDj7aSKeZ9o6CDXYaAvMS6Vda7-M5hl93Ws7zLCE9oTOUop8VR=Q9tf1CjXIGBG2B9Xn-nfPYLyCX66xS1661ZLOiyi3y=TEf5JNzjC40Ku8=1wLspSqhXSCtlEENytt9rir=JvfUQmh8NU8dWhY2M8FtExgR9_vcSCoJz0Z5QSQtoP9xoUBqa4rrbvAbSKsmsQjegoajefrwAB_=W1SSxrMSvAmLf=oxhXV_0=7n4rSur0ANFBEn6RcA9QoNwTs0B6te0Q9wtcTiZevY3_R-ydbKZrsb2-Toa61bOemMZ1a0_l7MOgGk2e-NFNQU5k35FuowF=rqLT_3gA2ZGs0vjZjGelrDC8-lp8qPrXyOO6_vyOuh6yPj4P1L-4LDhG3-23y2KGdccPpMLI1AWpmEVPdmz13tclUA1doDVyo1078dAXTcId6IaNdugKktqwp=X_zy4pMhPyoGlJ_Il6su0taRzx7tScDriFNsRxRPzCkeWzOBK-xI30croirgmnjiZBSzbE9171E1It3it=knXiCNSIvdbvCiBu4pERm3CsAufOckyWThF1r=eiRnDXjEsItRN0q851MAQJozYcavWJRJCjK36B5jEpnwjB3WAf10y_e7wO4hmqD-AAFBi_nPEI13UnBKKV=MFtGPLsuoKjv9afD-FytQquv0qnn=kFy3=m6k88o8zi_KDAc7CB44C=GBFQTnowiVGF40inxWRXKLn4ocIcnO=-FpOpI5_jrW8WZMyKLWY2EkBMkILAP-08zqQKjmIwwOREGveCRs0A0eA5rdawLRyUB1W19EVG9-86SOFcdzbZsM90PtMNUlXSQS3v3NiBLA67Zvz062v6TrwWJOEL7D=Nv1r=9Oaq_9dVrGVwyzJu3a-Zc6sB3I9VtzGKrs1sRY9hxabg8UYY3oRdk70EkXWmchyjAZvzgcIyNGyMaIZ0xuJ=1XDXaWg4lyVW7bQXY8ojDVW5h8TlJ=Aa2EnbuV3sAcejFj2_0OuJtiewDlpOMx2PIzh=mF-atVFrZj0s5goxp6O3IUYrJTq0UZuCp2UfyYc1RMeG5r_QXTkTbCsi1=YIUZ2ZuwFwPsl07WRuuJSU2mxnlY7iml_-VNg4zFpQuPLpze_bh-7DcYJ4UdUqJ=dugLPBkZNQqlBUqeiuTsCPSdYCZyqSDglcsS-jqv_FGRYXvmKO8jxjqpM-It9oBNZvAbLuaB7z6SZhOP=h4O0LLkNQPhlno4LPzQYpfMAPfbFNFwgReQTV4cQh0qwSVyYFfCKCO9CmQjeQAok91M-POhSr0nsYRZ8RGvUvvBBEotdljgNxk4oNc3fDoDMQAuYdlEfY88h6dfzD2T2w-jDoXdyZCnoRw6FA2P1OxK1aPRUA38fKUekTiqU6KR4IspsmmInf86-UieF7YaYQ0Bk1-52Zr7Sv6kMy53sF-yjB3tT2QecX4K9o_FXkuGjn_JIJSuae3rFVmoykVPaTuFllugv-cjKZnmyy3KhdboVFFmxvxNzqVjlm1Xr96_2hIO=Qv1d-IlDeazOAS5fo7rFyNJaT1fV55CJ7kIgp1N-2a3tfDTnpMWAX2APnf0UPkAiWyKOy3vo=JzpmkzMdhzPZBMDNbzYx2_lWbImUsSZBi7n5B=5meVJ4emw5EUUUBjzKZzZ5iWwy-8Sql=e7zjPk1PA5RWlgET5o6tXxqNJzE-q=9fqulTdP2yzIDoowngPFQN1a-4floLVlcA83NFViu0BzmD9obS5ZWt5mgfQU16QOyzzgdD_=q6f95cZCzcgEPxY101VcXcR4sjIemaDVmnZr-LvV=2uKiIKR1IP5mX9Vz_=FImmfS=s0GEfTofvo=GE8Bx-jMiGU=PMY=AglMvhc_tQf72g9M6TUPSulA3WcXMGJDcKjmc5-GkY2QhMP3GfRtNisyl2DsEL1rSlMBL0WR=Py2v7gBumumwGwnGYVkSXaNBwuGpcs88FIC=XXMTd6GIEzr8Ohc9wjr6QlBhzJ8_WTDDjO-xZTMncFO50lysLIZMLw4_-uWxlO-OO5TvttbzpcQmY4yY22Wq8AsY9kENfJWO50rCh10ErcjwOLNVBmULIAJiFKiG0AGRa35auDmsXJhDWRf2Ko6iVtDCfPbIlGsnm0vUnE5N5ar0i8jz0lQ=-kd6sVg_cAgqya7ZmPzg8WhxNZbUEGZf48NCtXzuuMcxackXOjqEVV9g2noy2m--8Kb3I0b=QrXMBOZT3W2lm7vWGtSuPrUPQrN5vThES_9efTOPEbTm6ATbeNdVcTz=9FMede_N0qonRzqYXP=qaJYhJ5-=OreJ0zCtkKA8Cx=iNYEW2ey27CmmAA-8PWW2uBCSTIA62JTO=qGvmZTaPOxIK=LVGuqpyapsEQGa8hcXjSBkfsg7dVktySW4iNwPQTV3MSORhSPv19tiGRJ3ntYwGgi-xdrfuIh=k90y_z9JBgLb2=GnG3mt80efcNOPxLngESQazmQTBDnvg6LklpVxLTDGPnXY-mzr0-G78Gx=dGYbDB=bKJhei9YM7Zv0ZadtSOJRDYd_XPtk3ESJJjfLO7auTc3PUaIzjAWZwLGSFdvaFPNDZQtoicmdwftLt6zu8rnvD2e7mUbqy349Tx0Oh9OCwqCdPAVuJk2r521P-zcyZsfmz5ytKpoQd2_IyMPWJg4O7aiDYdig=rp_lOifLswqyPbQ4az7XcegGWMhFtAkxv1ahWjImy5XJTbkAL5h5SS_ZcxC61MXKs_cC3vJAnNp0IhnENAWogCQxMjcJFSNj7v09zSNcf1VKzk2BKtfTpErWJ0MQCn=c6zwzW0F7r1SUJ53JWVD7SfUJboTAKxYaBM2OOBFUZp3oNXA5L1dJx=w5j=y0OTq8=ei3xzsV1=b=MjDGBsY51OCfJAMgW42_Ecwx9vCMu8TY7FhDNlVaq_fzDRQuJYDspD2meutgowX_b=LZRERl4qs4JKOROB71UxDm1K20RLwnLTawDApOZngaZa-QwmWnDYJJxqlSwdoxi2=s1mnR4chQLR=4sdDk6D-jIm5OADktur5uez0PnJl0ghGiQl2YSuA2LAQb4kaU0kJv3Gl50Ns_442Ev-iRKFA1aOWJJ4XnBql1KPskg5jmwcQdE-P9-bCqy-zMm7t1Uy94eq=uZZcnudWWvzTjN7onvnGe920EQ9E2l4g5mDUcmpfFINa6dVfEqL5PiyzIOebTsY4CSONkOcoTF5EWWF-WQeTzkpxM9Yx5SvGrs4_UUJEJA3=j-EoLdiue3RYxZcjk5A6FV2yG7RGdxNf0LjZNhzd2gPfCnMcefTm-nMdcEZU5Nn8RxkuRo1gYnsgDRi00b0KfcSOg71Ly1AhR22cukafEdfRjvAeT8wNCDP0ShMbjEdgwekA_VBuKMOGdt-tz87sPdIWnryNX2VtdaNj2QY4iuyM1o9tuPVG2fzP=zk4zYBmuu6nOKMjaUXANUqMyk9AzSDz_1q7DOS1gQGIMUj0RhTdaD8RWCO1khBuu5mj6sdmqpiF9X2Czt9KFJNhjKkWrS5Ner4bLZj=JVluiKpPFBGzdfDVBPtQzlNiUjnYvtMDXi6AzsTCgeiWF_sr9A75jhpTDwW1svnfi871jzdrgyeMcQeyWh4_vYj5-yAAY3nL-WX_5pl11nt3BS7WTnyyKLaDWP88BxUvvxjMbxpsXOOt8xOnwDWhW6eu0ohlu7Bdea=DZepjd6Pyz4ggJfeaC5_W9vOU=6LDVP85SELT_-SI6NOWLgNGwrirNdGOm4DhfQ5Kxat4VOTfzJR_8UtEmOgkBI0pA_meoXWfzF2-UxKa3n5KheDGG63sMzh9yNM5Ui735IeWgwXOBF5Jjmz51npq9UUelY9SzEJBMmaOEEOMYD-Kg15ckjfW3vBjQEh7r70wNCR96EAliSPV7--cKCk2m8l1BVMUZh06s3JKNRkZalWrEK2O2nWIirjg0hkuLWGOF1nn--b2WlArdet969mqn21DOx-UvA7J43BG49jN=bZGcwtaAX2rIYIj0dMTilPgvJTEC62KDx16v3niMgCDNvpQtTSSINRlEcaKT3raufmfbG--2ORm48iXvYimEvmI9jxQ8IX6V__SxY6KoMfmgDrc0AQ91kZB6vzQcQ2RPMgLhD0yKBviz=Va1fJRkvczXdQwMQhGlA_awfqS_x_IhXWMeoBRRfOmn=CLTYkMz2gl=Vl2WWxn1wro2FF_mwI19ZTmuqWvNC3yrYU-R8-MCPYOrp8eBIwDhDGmwAp0XxFJghv5VsVvg5ZBPubFxgNzhw_3JvPBcNUmIxv1TQ0GW_pwm-jey2',
-'htc6j8njvn-f':'A9n4p0SJAQAAyoKwYsSie7-usq7tLrDTBzF9sHNZwZlJ3ktzsb1LAkfQAB2fASXtbR0J-BRAwH9CmjJdQ4dCmg==',
-'x-mssdk-info':'7liUYJRkHmGtgRo-TZ.Z.7E74CgUzqLv6dzVWvVLX8CERcXXBBEUWoVLJY8KpXIn-lQzZhddWwNygZJ5yjp3ew9z7R0C3kW2PATmcHOUbBMaoMMDsSKcBXwE7-tIXqF4da-5E7ZmBgC4S9jKqX3GfVoemEvJb0L4fKKsY.D114zBanjfbKdVWvSMOc.18rdCekAYife3R1FOaUPp3vaFpwbPutCOYvq6zsqJVFhy.Z8iWF9-uxHTOlLxPh0jug.Z78Z86rwZ9b-sGcRuoxaDnFgNQUmBsV7Nz7O86eWeHmVHKtRAp1OeF6yPdnR1X2Zu5qB0vJJJZZ0LHmOlUqenauY1XVF5pPSVfHT1dKcXf2-ySYkpKAF06wEQb0-UDQnoElJ5uOGr6Mp-YHmysdIEBT5A81UHH2HPPIA0iekhIeYtPjWagXRLrEXIRRxzXwsaQQMvM.-E7hOjz6Q23C-wJdGRxsA1fOfIL8WTuTPFlJoaRCuupJwdYQuGzDDwTXPR0jkQ3LsGRA5dCmFry3YbOf5rPMS2dzQq-H4qact5dAlKurzFeawl6tIwpEARZ4Y1lNYZAa4XhSB3lzRNB-GSWK2HLSJqy1nEPIJrRcr9ArJTFHyrFiECX4TwxXo5dLibHR8visUtY39hv7MQbsE5rE6tRtl0Yi-DUh.ernVpSO8S74KgfiaRiEXKXT-03CT8-w-s72L5i6PzB1Sr.wsoFL18YIuzZwn7rKXWljyWT6Ujy3gy3AwGdkH1fuXtVPrQ-oX1DqgCBFrClfJJT24Dj5-wA08Es0oJ9Fs7EYlnOZCZ5GFp8qVtAudA3cpMwco6Sr8b.Cep-fWVEg6u8-wAcy7SleTpF52gStR3VQr11VbFyz6WxBVGEh48mja1iMswB2Ekv8aI69yWP9n-ArVDezi-AOpw1lQOzDnliXr2lOK4qbanb-kxt8MAayh7.bJkbywW.c6jYjoAtrNgshC4h1iHnIug94Nu3e75Nl6X0ttV8BCOG9ve7MDnzFYSmu62X-3GZ4Q20jM-1TQgrcEi2ijG-LHQ0Lzf7SbZnNRRtydfCC8ab0NheAdBCNcYYWpPz4QAjPldA2tnVOyCrwN1jRr6skTa3-0fBUsMiGeuBeC4.Y3zaM7IC9dIiLwyIVx3SKSep70T5ggPHENrRf1brSGV8Evr-ab9oMHGK9jOptvQXBDOavqgdPJf6sWAYT5W81doF6ScRHlfKS5Vk.udPWaAemT165QL7bjO.gOlin0UByjX09WWQTzaxYv5TKyt3.Q7EJXs5wE-3m4ybOwR6cyr3Mhw5Q3zEavu3ieg76l-5oZiJIG08RxjSCbBZPsXW7IRJaZhxSW2RxbUZyO974vssH5mNM8vsJQPvqrkQncI-w14ZHxJ3gAMYjnRozUnxfWt1shlxmC2ndCreIJckAbMQJZ.O3vNnvDxTVPR7bAdAxsNu6Iv2cyl7L1a8.BfvuhXNX-b3C4I5CEb5q9NHuNZd8hrEPRZ8ZcwSCHtYXvHF3oR0iQML-CgXuQ-JyA4LzI0llK4sRNb7I2OdXuL8p4p8HPOVQpNtqHalKhwWepjlezVoOky7iGH9wlAmgxkVBS3Yn1Gt.4KAaTxXQyjD4ficmQtZWPXuXdW-hw2vmANdhAYKBosJR8h2uOttvLeeJwsU7V8yxAbl.WYktx-QaDBiVoYbc5J1plAalBBpjr07ujumecvLcShuUERe.j2DPdrdmxTyILql6-chV-NMF57PO6Q175q5hHeBDA1KbOmfm2hQxoMnTm9XMxJXdrskva1vosrMK6XT4hmjHOtr84AeWGv9H4IZVFd24e7zgN19BY5C.lXIGtGgph4bZW1qrIIQHTk-qXPL8-qPH33gSRSdnpqbMFW4lnpn5aBcNhVm0Esc3NUO7SAju..8lNzvxrGWjT3Xg-HL5g9LcTlWhuyoqGfgAD6OMHPm.9yGYcESYEFfxK69Up52eUuxM6yr1vIY5uvZC.pQjmC13cfbuOvLJNs9.v7q1gkMxi7I9j9BpqPrN-wn2dM8DUyA5NNFJrn3ewXABx5FRxjtX-nIjWZPWdgTOFpqDta9O9UpyjmUvAE66WKg23d7LMiLAlA9EMr60oJki6arAn-yq-BcA.X6kQBFJfXGw56PLRWILHGvNjm3nh.H8QSuhNS8zafxIrSknyJt4v5mQBJ-pwmF40ltc.w1gLxnO.-rOcSAvelO3cdICd.mgwaoqXZJZTvvRsNtp5x.K9RpPvKdSE2Oy1OYQ.TsnrjyqcEJxH1D4ZMK9kf3PbSFwQfwLWw4AKajTxyqpcqzxr6Ajcupva81xYcAYzgA6v1QLA8VuMAqLj9yPry1bsjN4YQlM0EU6rGmJA2mYUel5mpIjz3yM4wZGjjqz8mXT7JXcHitKtwhnmqryQ9KEJJcWY-bcDDlcsEGSqASYRCbGRRL4.-mASJ5uygc8VQ-iA7EePFdrUcnouIMrtlBp-wqp-qwLKQim3-K3uyuMQa9n5mZt4Vp9ZpGRZgxGIS9T8vjmN1C8Z.4tWoIpDlUDC4hRmvV8FsSWeBBU9BryUaojP.m-0b0SNQDibLcka9h07wKuATsjyYVMmB59SJ74BwKRGZcfysH7d7qJVkDTOf1qer-d-g8WjyU2YqV2tRnSOoJfjs2EEuNiQip.RqsjaxSI6HAQf-2rWeWoFiJxc0GzR.2-hbxGdBko8b76MHSmp1ex62v8zUoe9qO.3eC9OLlB1rluly4BefrWlMk8HhEamFC02kIGmiOQUQhOAtIqZewQYYB3JqogffhIUk22cc6xVL4w==',
-'sec-ch-ua-platform':'"Android"',
-'origin':'https',
-'sec-fetch-site':'same-site',
-'sec-fetch-mode':'cors',
-'sec-fetch-dest':'empty',
-'referer':'https',
-'accept-encoding':'gzip,deflate,br',
-'accept-language':'ar-AE,ar;q=0.9,en-US;q=0.8,en;q=0.7',
-'cookie':'_abck=70B400ADEDF2BB3C5B9CF384933541FC~-1~YAAQBrR7XOB+04KEAQAABExKnAiK3Om710l9HuvdekeuV91Nv6vV4NdJwetXzQUzcfuu5UL/2LX3sgI3f8/tE4iMXGmwO5fHNr8S7aqbLhYRKfErKmTI1SNI/bwp7k63vnZpuWIHTsQQS9zc8prcvMzgiV+AF80xBqUcfRE+7qmHhiWXG/qSt/o8uM1der3Oz7oo85bh6HVselRE1sPfu+wiNUHxlPw0hV02NhwZVd17+3Eg1i650sVHmsnLcEQ2CuZgcjfkC2URA6FYyWeM+VWKlVId6/WI3673ClArNyMd56ggp6nuiz7Ip2cziPSUnzNwfV341uWYa6m4BmxQAWWmbO/tOj5cRQq6gwxinlRlLnwSQUWc09NlLJP3WKTToPKatoQ48gLBOZk=~-1~-1~-1',
-'cookie':'_ttp=2Ppk7ZLy30NkAaJR9X9HK2j6xE7',
-'cookie':'passport_csrf_token=b9979edc215fbdda5d126b57562890b0',
-'cookie':'passport_csrf_token_default=b9979edc215fbdda5d126b57562890b0','cookie':'tt_csrf_token=SBPlCoIl-86JjBSYTgYulL6J9iHBbmUjpI2E',
-'cookie':'ttwid=1%7C3xdE1ftOmEEY6D3xpMEckigF2uMGuJ256yhecMdwtIU%7C1689074011%7C76acb594cc9fe78a6e29070aa3b374461ea8a0e365f813a66cf756a1f8f136c1',
-'cookie':'msToken=bQS9rhPYkxEJp3sRfZZ6dAzm2kiNuYKp8yVSmUwuZevi_4S6Q-zmcCqpPdtMqC4aEzkGf5qQxPMudCR7GZanpLHGxeMn0ddX0VDrs45PDuwBpfREdi0n4xw2Cm30wfsq_IY5zg=='}
-
-    data = f"email={email}"
-
-    Levi = requests.post(url,headers=headers,data=data).text
-
-    return(Levi)
+def de(text,num):
+	try:
+		return {'done check': dd(text,int(num))}
+	except:
+		return {'bad': 'user not fond'}
